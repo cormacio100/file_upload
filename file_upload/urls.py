@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+#********************* FILE_UPLOAD ****************
 from django.conf import settings
 from django.conf.urls.static import static
+#********************* FILE_UPLOAD ****************
 from home import views as home_views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,5 +29,7 @@ urlpatterns = [
     url(r'^uploads/', include('uploads.urls')),
 ]
 
+#********************* FILE_UPLOAD ****************
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# ********************* FILE_UPLOAD ****************

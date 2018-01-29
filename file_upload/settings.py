@@ -50,6 +50,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #********************* FILE_UPLOAD ****************
+    #'django.contrib.staticfiles.views.serve()',
+    #********************* FILE_UPLOAD ****************
 ]
 
 ROOT_URLCONF = 'file_upload.urls'
@@ -65,7 +68,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #********************* FILE_UPLOAD ****************
                 'django.template.context_processors.media'
+                #********************* FILE_UPLOAD ****************
             ],
         },
     },
@@ -138,5 +143,8 @@ LOGGING = {
 
 STATIC_URL = '/static/'
 
+
+#********************* FILE_UPLOAD ****************
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#********************* FILE_UPLOAD ****************
