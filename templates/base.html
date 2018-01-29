@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload Test</title>
+    <!-- Required Bootstrap meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Book an Entertainer / Act / Musician / Band / Speaker / Comedian for your Event">
+    <meta name="author" content="Cormac Liston">
+</head>
+<body>
+    <ul>
+        <li><a href="{% url 'home' %}" >Home</a></li>
+        <li><a href="{% url 'uploads:upload_form' %}">Upload</a></li>
+    </ul>
+    {% block content %}{% endblock %}
+    {% block script %}{% endblock %}
+</body>
+</html>
