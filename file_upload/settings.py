@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'home',
     'uploads',
-    'django_forms_bootstrap'
+    'django_forms_bootstrap',
+
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #********************* FILE_UPLOAD ****************
@@ -137,14 +140,31 @@ LOGGING = {
         },
     },
 }
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 #********************* FILE_UPLOAD ****************
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #********************* FILE_UPLOAD ****************
+
+
+#********************* FILE_UPLOAD ****************
+#       DEBUG TOOLBAR SETTINGS
+#********************* FILE_UPLOAD ****************
+"""
+INSTALLED_APPS.append('debug_toolbar')
+MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': 'bookAnEntertainer.settings.show_toolbar',
+}
+
+
+def show_toolbar(request):
+    if not request.is_ajax(): # and request.user: # and request.user.username == "cormacio":
+        return True
+    return True
+"""

@@ -1,7 +1,22 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
 {% block content %}
-        <div class="row">
-            <h1>Index</h1>
+        <div class="row container">
+            <div class="col-12">
+                <h1>Index</h1>
+            </div>
+        </div>
+        <div class="row container">
+            <div class="col-12">
+                <ul>
+                    {% for obj in uploads %}
+                        <li>
+                            <a href="{{ obj.image }}">{{ obj.description }}</a>
+                            <small>(Uploaded at: {{ obj.uploaded_at }})</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
         </div>
 {% endblock %}
