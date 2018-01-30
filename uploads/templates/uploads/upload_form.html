@@ -1,7 +1,31 @@
 {% extends "base.html" %}
+{% load static %}
 {% load bootstrap_tags %}
 {% block content %}
     <div class="row">
-        <h1>Upload Form</h1>
+        <div class="col-12">
+            <h1>Upload Form</h1>
+            <form role="form" method="post" class="account-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if form %}
+                    {{ form | as_bootstrap }}
+                {% endif %}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-orange btn-block">Upload</button>
+                </div>
+                <div>
+                    {% if uploaded_image_url %}
+                        <p>File uploaded at <a href="{{ uploaded_image_url }}">{{ uploaded_image_url }}</a></p>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if uploaded_document_url %}
+                        <p>File uploaded at <a href="{{ uploaded_document_url }}">{{ uploaded_document_url }}</a></p>
+                    {% endif %}
+                </div>
+
+            </form>
+            <p><a href="{% url 'home' %}">Return to Home</a></p>
+        </div>
     </div>
 {% endblock %}
