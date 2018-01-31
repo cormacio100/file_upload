@@ -5,6 +5,8 @@ from django.db import models
 from datetime import datetime
 import os
 
+
+
 def profile_image_path(instance, filename):
     upload_dir = os.path.join('profile/', instance.description)
     if not os.path.exists(upload_dir):
@@ -19,17 +21,17 @@ class Upload(models.Model):
 
     description = models.CharField(max_length=255, blank=True)
     image = models.ImageField(
-        #upload_to = 'images/',
-        upload_to=profile_image_path,
+        #upload_to = 'media/images/',
+        #upload_to=profile_image_path,
         #blank=True,
         #null=True,
-        default='/media/acdc_profile.jpg'
+        default='media/no_image.png'
     )
     document = models.FileField(
-        upload_to = 'documents/',
+        #upload_to = 'media/documents/',
         #blank = True,
         #null = True
-        default='/media/acdc.txt'
+        default='media/no_text.txt'
     )
     uploaded_at = models.DateTimeField(
         default = datetime.now

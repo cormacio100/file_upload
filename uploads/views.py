@@ -25,13 +25,21 @@ def upload_form(request):
         """
 
         #   save the IMAGE to the filesystem and retrieve the URL from where it is stored
-        fs_img = FileSystemStorage(location='media/images/')
+        img_folder = 'media/images/'
+        fs_img = FileSystemStorage(location=img_folder,base_url='/media/images/')
         imageName = fs_img.save(image.name,image)
         uploaded_image_url = fs_img.url(imageName)
 
         #   save the DOCUMENT to the filesystem and retrieve the URL from where it is stored
-        fs_doc = FileSystemStorage(location='media/documents/')
+        doc_folder = 'media/documents/'
+        fs_doc = FileSystemStorage(location=doc_folder,base_url='/media/documents/')
         documentName = fs_doc.save(document.name, document)
+
+        """
+            File saves to the correct location e.g. media/documents/band.txt
+            BUT
+            .url is incorrect e.g. media/band.txt
+        """
         uploaded_document_url = fs_doc.url(documentName)
 
         """

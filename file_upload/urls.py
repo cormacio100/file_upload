@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^$',home_views.get_index, name="home"),
     #   UPLOADS APP URLS
     url(r'^uploads/', include('uploads.urls')),
-]
+]#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #********************* FILE_UPLOAD ****************
 if settings.DEBUG:
