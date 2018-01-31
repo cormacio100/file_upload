@@ -1,5 +1,6 @@
 from django import forms
 from uploads.models import Upload
+import os
 
 ##########################################
 #   LOGGING
@@ -22,29 +23,11 @@ class FileUploadForm(forms.ModelForm):
     def __init__(self,user,*args,**kwargs):
         _urls = kwargs.pop('_urls',None)
         self.user = user
-        #self.description =
+        #   retrieve the urls of the image and document
         if _urls is not None:
             self.image = _urls[0]
             self.document = _urls[1]
-        #self.kwargs = kwargs
-        self.write_to_log('Initialising the FileUploadForm')
-        self.display_kwargs(**kwargs)
-        #super(FileUploadForm,self).__init__(uploaded_image_url,uploaded_document_url,*args,**kwargs)
         super(FileUploadForm, self).__init__(*args, **kwargs)
-
-
-    def write_to_log(self,sentence):
-        log.debug(sentence)
-        item = 'print to log'
-        print item
-
-    def display_kwargs(self,**kwargs):
-        print 'printing kwargs'
-        for item in kwargs.items():
-            print item
-            log.debug(item)
-
-
 
 
     #   SAVE FUNCTION IS CREATED IF ANY LOGIC HOOKS NEED TO BE ADDED
@@ -56,14 +39,23 @@ class FileUploadForm(forms.ModelForm):
         #   auto set the user instance to that provided by the view
         instance.image = self.image
         instance.document = self.document
-
+        #instance.image = self.add_folder_ext(self.image,'image')
+        #instance.document = self.add_folder_ext(self.document,'document')
 
         if commit:
             instance.save()
         return instance
 
-
-
+    """
+    def add_folder_ext(self,url,type):
+        if 'image' == type:
+            upload_dir = os.path.join('images/', url)
+        elif 'document' == type:
+            upload_dir = os.path.join('images/', url)
+        if not os.path.exists(upload_dir):
+            os.makedirs(upload_dir)
+        return os.path.join(upload_dir, url)
+    """
 
 
 class DocumentImageForm(forms.ModelForm):
