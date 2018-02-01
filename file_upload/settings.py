@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os
+import os, urlparse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -149,7 +149,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #********************* FILE_UPLOAD ****************
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+FS_IMAGE_UPLOADS = os.path.join(MEDIA_ROOT,'images/')
+FS_IMAGE_URL = os.path.join(MEDIA_URL,'images/')
+
+FS_DOCUMENT_UPLOADS = os.path.join(MEDIA_ROOT,'documents/')
+FS_DOCUMENT_URL = os.path.join(MEDIA_URL,'documents/')
+
 #********************* FILE_UPLOAD ****************
+
+
 
 
 #********************* FILE_UPLOAD ****************

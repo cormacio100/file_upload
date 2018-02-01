@@ -5,7 +5,7 @@ from django.core.files.storage import FileSystemStorage
 
 from uploads.models import Upload
 from forms import FileUploadForm,DocumentImageForm
-
+from django.conf import settings
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -25,14 +25,22 @@ def upload_form(request):
         """
 
         #   save the IMAGE to the filesystem and retrieve the URL from where it is stored
-        img_folder = 'media/images/'
-        fs_img = FileSystemStorage(location=img_folder,base_url='/media/images/')
+        #img_folder = 'media/images/'
+        #fs_img = FileSystemStorage(location=img_folder,base_url='/media/images/')
+        fs_img = FileSystemStorage(
+            location = settings.FS_IMAGE_UPLOADS,
+            base_url= settings.FS_IMAGE_URL
+        )
         imageName = fs_img.save(image.name,image)
         uploaded_image_url = fs_img.url(imageName)
 
         #   save the DOCUMENT to the filesystem and retrieve the URL from where it is stored
-        doc_folder = 'media/documents/'
-        fs_doc = FileSystemStorage(location=doc_folder,base_url='/media/documents/')
+        #doc_folder = 'media/documents/'
+        #fs_doc = FileSystemStorage(location=doc_folder,base_url='/media/documents/')
+        fs_doc = FileSystemStorage(
+            location = settings.FS_DOCUMENT_UPLOADS,
+            base_url=settings.FS_DOCUMENT_URL
+        )
         documentName = fs_doc.save(document.name, document)
 
         """
