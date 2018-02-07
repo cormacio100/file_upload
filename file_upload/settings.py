@@ -147,23 +147,52 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 #********************* FILE_UPLOAD ****************
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-FS_IMAGE_UPLOADS = os.path.join(MEDIA_ROOT,'images/')
-FS_IMAGE_URL = os.path.join(MEDIA_URL,'images/')
+#FS_IMAGE_UPLOADS = os.path.join(MEDIA_ROOT,'images/')
+#FS_IMAGE_URL = os.path.join(MEDIA_URL,'images/')
 
-FS_DOCUMENT_UPLOADS = os.path.join(MEDIA_ROOT,'documents/')
-FS_DOCUMENT_URL = os.path.join(MEDIA_URL,'documents/')
-
-#********************* FILE_UPLOAD ****************
-
-
-
+#FS_DOCUMENT_UPLOADS = os.path.join(MEDIA_ROOT,'documents/')
+#FS_DOCUMENT_URL = os.path.join(MEDIA_URL,'documents/')
 
 #********************* FILE_UPLOAD ****************
+
+#********************* AWS_SETTINGS ****************
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'CacheControl': 'max-age=94608000',
+}
+
+AWS_STORAGE_BUCKET_NAME = 'file-upload-cormac'
+AWS_S3_REGION_NAME = 'eu-west-1'  # e.g. us-east-2
+AWS_ACCESS_KEY_ID = 'AKIAI7IGEHAIRG7RX7HA'
+AWS_SECRET_ACCESS_KEY = 'ep4jN/qXYFkeIyvcgWhQIy0x5v4YKXOzhEAlhBH0'
+
+# Tell django-storages the domain to use to refer to static files.
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+# Tell the staticfiles app to use S3Boto3 storage when writing the collected static files (when
+# you run `collectstatic`).
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+
+MEDIAFILES_LOCATION = 'media'
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+
+FS_IMAGE_UPLOADS = os.path.join(DEFAULT_FILE_STORAGE,'images/')
+FS_IMAGE_URL = os.path.join(DEFAULT_FILE_STORAGE,'images/')
+
+FS_DOCUMENT_UPLOADS = os.path.join(DEFAULT_FILE_STORAGE,'documents/')
+FS_DOCUMENT_URL = os.path.join(DEFAULT_FILE_STORAGE,'documents/')
+
+#********************* AWS_SETTINGS ****************
+
+
+#********************* DEBUG ****************
 #       DEBUG TOOLBAR SETTINGS
-#********************* FILE_UPLOAD ****************
+#********************* DEBUG ****************
 """
 INSTALLED_APPS.append('debug_toolbar')
 MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
