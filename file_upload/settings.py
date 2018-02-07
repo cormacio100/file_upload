@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,11 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'home',
     'uploads',
     'django_forms_bootstrap',
-
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -144,7 +142,10 @@ LOGGING = {
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 #********************* FILE_UPLOAD ****************
 MEDIA_URL = '/media/'
@@ -158,12 +159,35 @@ FS_DOCUMENT_URL = os.path.join(MEDIA_URL,'documents/')
 
 #********************* FILE_UPLOAD ****************
 
+#********************* AWS_SETTINGS ****************
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'CacheControl': 'max-age=94608000',
+}
+
+AWS_STORAGE_BUCKET_NAME = 'file-upload-cormac'
+AWS_S3_REGION_NAME = 'eu-west-1'  # e.g. us-east-2
+AWS_ACCESS_KEY_ID = 'AKIAI7IGEHAIRG7RX7HA'
+AWS_SECRET_ACCESS_KEY = 'ep4jN/qXYFkeIyvcgWhQIy0x5v4YKXOzhEAlhBH0'
+
+# Tell django-storages the domain to use to refer to static files.
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+# Tell the staticfiles app to use S3Boto3 storage when writing the collected static files (when
+# you run `collectstatic`).
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+
+MEDIAFILES_LOCATION = 'media'
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+
+#********************* AWS_SETTINGS ****************
 
 
-
-#********************* FILE_UPLOAD ****************
+#********************* DEBUGGING ****************
 #       DEBUG TOOLBAR SETTINGS
-#********************* FILE_UPLOAD ****************
+#********************* DEBUGGING ****************
 """
 INSTALLED_APPS.append('debug_toolbar')
 MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')

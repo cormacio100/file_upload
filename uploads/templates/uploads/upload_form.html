@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load staticfiles %}
 {% load bootstrap_tags %}
 {% block content %}
     <div class="row">
@@ -16,6 +16,7 @@
                 <div>
                     {% if uploaded_image_url %}
                         <p>File uploaded at <a href="{{ uploaded_image_url }}">{{ uploaded_image_url }}</a></p>
+
                     {% endif %}
                 </div>
                 <div>
@@ -28,4 +29,7 @@
             <p><a href="{% url 'home' %}">Return to Home</a></p>
         </div>
     </div>
+{% endblock %}
+{% block script %}
+
 {% endblock %}
