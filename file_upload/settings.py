@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os, urlparse
+import env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6jfljvb++k9m9yn8@f*b_#ccxxcra&o2e$x0r!lv3me2a+_j)2'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -167,8 +168,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 AWS_STORAGE_BUCKET_NAME = 'file-upload-cormac'
 AWS_S3_REGION_NAME = 'eu-west-1'  # e.g. us-east-2
-AWS_ACCESS_KEY_ID = 'AKIAI7IGEHAIRG7RX7HA'
-AWS_SECRET_ACCESS_KEY = 'ep4jN/qXYFkeIyvcgWhQIy0x5v4YKXOzhEAlhBH0'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
 # Tell django-storages the domain to use to refer to static files.
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
@@ -181,11 +182,11 @@ STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 MEDIAFILES_LOCATION = 'media'
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
-FS_IMAGE_UPLOADS = os.path.join(DEFAULT_FILE_STORAGE,'images/')
-FS_IMAGE_URL = os.path.join(DEFAULT_FILE_STORAGE,'images/')
+FS_IMAGE_UPLOADS = os.path.join(AWS_S3_CUSTOM_DOMAIN,'images/')
+FS_IMAGE_URL = os.path.join(AWS_S3_CUSTOM_DOMAIN,'images/')
 
-FS_DOCUMENT_UPLOADS = os.path.join(DEFAULT_FILE_STORAGE,'documents/')
-FS_DOCUMENT_URL = os.path.join(DEFAULT_FILE_STORAGE,'documents/')
+FS_DOCUMENT_UPLOADS = os.path.join(AWS_S3_CUSTOM_DOMAIN,'documents/')
+FS_DOCUMENT_URL = os.path.join(AWS_S3_CUSTOM_DOMAIN,'documents/')
 
 #********************* AWS_SETTINGS ****************
 
