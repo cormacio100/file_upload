@@ -22,8 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '6jfljvb++k9m9yn8@f*b_#ccxxcra&o2e$x0r!lv3me2a+_j)2'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'uploads',
     'django_forms_bootstrap',
     'storages',
+    'settings',
 ]
 
 MIDDLEWARE = [
@@ -78,17 +78,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'file_upload.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
@@ -185,19 +174,3 @@ DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 #********************* AWS_SETTINGS ****************
 
 
-#********************* DEBUGGING ****************
-#       DEBUG TOOLBAR SETTINGS
-#********************* DEBUGGING ****************
-"""
-INSTALLED_APPS.append('debug_toolbar')
-MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
-DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': 'bookAnEntertainer.settings.show_toolbar',
-}
-
-
-def show_toolbar(request):
-    if not request.is_ajax(): # and request.user: # and request.user.username == "cormacio":
-        return True
-    return True
-"""
