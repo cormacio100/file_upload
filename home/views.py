@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+import os
 
+from django.conf import settings
 from django.shortcuts import render
 from uploads.models import Upload
 
-# Create your views here.
+
 def get_index(request):
     uploads = Upload.objects.all()
-    return render(request, 'home/index.html',{'uploads':uploads})
+    media_url = os.path.join(settings.AWS_S3_CUSTOM_DOMAIN,
+                             settings.MEDIAFILES_LOCATION)
+    print(media_url)
+    return render(
+        request, 'home/index.html',
+        {'uploads': uploads, 'media_url': media_url})
 
 
 # Display all the uploads

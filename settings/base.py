@@ -157,14 +157,6 @@ STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 MEDIAFILES_LOCATION = 'media'
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
-FS_IMAGE_UPLOADS = os.path.join(AWS_S3_CUSTOM_DOMAIN,'images/')
-FS_IMAGE_URL = os.path.join(AWS_S3_CUSTOM_DOMAIN,'images/')
-
-FS_DOCUMENT_UPLOADS = os.path.join(AWS_S3_CUSTOM_DOMAIN,'documents/')
-FS_DOCUMENT_URL = os.path.join(AWS_S3_CUSTOM_DOMAIN,'documents/')
-
-#********************* AWS_SETTINGS ****************
-
 
 #********************* DEBUG ****************
 #       DEBUG TOOLBAR SETTINGS
