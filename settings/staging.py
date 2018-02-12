@@ -1,14 +1,12 @@
 from base import *
+import dj_database_url
 
 DEBUG = False
 
 ALLOWED_HOSTS.append('file-upload-cormac-s3.herokuapp.com')
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config('CLEARDB_DATABASE_URL')
 }
 
 LOGGING = {
