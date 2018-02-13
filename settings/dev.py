@@ -7,7 +7,7 @@ DEBUG = True
 INSTALLED_APPS.append('debug_toolbar')
 MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': 'bookAnEntertainer.settings.show_toolbar',
+    'SHOW_TOOLBAR_CALLBACK': 'file_upload.settings.show_toolbar',
 }
 
 # Database
